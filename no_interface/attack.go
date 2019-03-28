@@ -6,13 +6,12 @@ import (
 	"time"
 )
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
+// RNG random number generater
+var RNG *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 // RoleD10 returns 0-9
 func RoleD10() int {
-	return rand.Intn(10)
+	return RNG.Intn(10)
 }
 
 // Attack 攻撃結果は10面ダイスを2つ振ってパーセンテージ判定する
