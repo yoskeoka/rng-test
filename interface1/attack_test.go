@@ -4,11 +4,11 @@ import (
 	"testing"
 )
 
-type RandomNumberGeneraterMock struct {
+type RandomNumberGeneratorMock struct {
 	IntnResults []int
 }
 
-func (rng *RandomNumberGeneraterMock) Intn(n int) int {
+func (rng *RandomNumberGeneratorMock) Intn(n int) int {
 	result := rng.IntnResults[0]
 	rng.IntnResults = rng.IntnResults[1:]
 	return result
@@ -17,7 +17,7 @@ func (rng *RandomNumberGeneraterMock) Intn(n int) int {
 // 乱数生成をモックにすることで確実に望みの乱数に対する挙動をテストできる
 func TestAttack_RNGのMockで確実に成功(t *testing.T) {
 	// 1 が出るように仕込む
-	RNG = &RandomNumberGeneraterMock{IntnResults: []int{0, 1}}
+	RNG = &RandomNumberGeneratorMock{IntnResults: []int{0, 1}}
 	got := Attack()
 	want := "HIT!"
 
@@ -43,7 +43,7 @@ func TestAttack_ケース網羅(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// fakes で指定したRNGの結果をここで仕込む
-			RNG = &RandomNumberGeneraterMock{IntnResults: tt.fakes.FakeIntnResults}
+			RNG = &RandomNumberGeneratorMock{IntnResults: tt.fakes.FakeIntnResults}
 
 			if gotResult := Attack(); gotResult != tt.wantResult {
 				t.Errorf("Attack() = %v, want %v", gotResult, tt.wantResult)

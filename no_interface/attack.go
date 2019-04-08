@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// RNG random number generater
+// RNG random number generator
 var RNG *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 // RoleD10 returns 0-9

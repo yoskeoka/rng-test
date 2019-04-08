@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-// RandomNumberGenerater returns pseudo-random number
-type RandomNumberGenerater interface {
+// RandomNumberGenerator returns pseudo-random number
+type RandomNumberGenerator interface {
 	Intn(n int) int
 }
 
-// RNG random number generater
-var RNG RandomNumberGenerater = rand.New(rand.NewSource(time.Now().UnixNano()))
+// RNG random number generator
+var RNG RandomNumberGenerator = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 // RoleD10 returns 0-9
 func RoleD10() int {
